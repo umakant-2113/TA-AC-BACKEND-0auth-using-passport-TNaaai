@@ -17,20 +17,16 @@ let user_profile={
     email:profile._json.email,
     images:profile._json.avatar_url
 }
-console.log(profile._json.avatar_url)
-// console.log(user_profile)
-User.findOne({ email: profile._json.email },(err,user)=>{
-    console.log(user,'userdata')
-    if(err) return done(err);
 
+User.findOne({ email: profile._json.email },(err,user)=>{
+    if(err) return done(err);
     if(!user){
         User.create(user_profile,(err,addUser)=>{
-            console.log(addUser,"adduser data")
             if(err) return done(err);
             return done(null,addUser)
         })
     }
-    done(null,false)
+    done(null,user)
 })
 
 }))
