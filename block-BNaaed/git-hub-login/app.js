@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 let mongoose=require("mongoose");
 let session=require("express-session")
-// let passport=require("passport")
+let mongoStore= require("connect-mongo");
 
 // connect-mongoose
 
@@ -20,6 +20,7 @@ require("./moduls/passport")
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const passport = require('passport');
+
 
 var app = express();
 
@@ -36,19 +37,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret:"somerandomtext",
+  secret:process.env.SECRET,
   saveUninitialized:false,
-  resave:false
+  resave:false,
+  store:new mongoStore({mongoUrl:"mongodb://127.0.0.1/github"})
 }))
-
-
-
-
-
-
-
-// app.use(passport.initialize())
-// app.use(passport.session())
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
