@@ -1,0 +1,51 @@
+<%include partails/header%>
+<body>
+ <main>
+    <h2> <%= article.title %></h2>
+    <p><%= article.author  %></p>
+    <p><%= article.description %>  </p>
+    <p><%=article.tags%>  </p>
+    <p><%=article.pages%> </p>
+    <p>  <%=  article.likes  %>  </p>
+    <div>
+        <a href="/articles/<%=article.id%>/likes">Likes</a>
+        <a href="/articles/<%=article.id%>/dislikes">Dislikes</a>
+    </div>
+    <% if(user.id ==article.userId) { %>
+    
+        <div>
+            <a href="/articles/<%=article.id%>/edit">Edit</a>
+            <a href="/articles/<%=article.id%>/delete">Delete</a>
+        </div>
+    
+    <% } %>
+    
+    <form action="/articles/<%=article.id%>/comment" method="POST">
+        <div class="form-div div2">
+        <textarea name="text" id="" cols="30" rows="10" placeholder="Description"></textarea>
+        <input type="text" name="author" placeholder="Author">
+        <input type="submit" value="Add">
+    </div>
+    </form>
+    
+    <%article.comments.forEach(comments=>{ %>
+        <h2><%= comments.text%> </h2>
+        <p> <%=comments.author %>  </p>
+        <p> <%= comments.likes%> </p>
+    
+        <div>
+            <a href="/articles/<%=comments.id%>/comment/likes"> Likes </a>
+            <a href="/articles/<%=comments.id%>/comment/dislikes"> dislikes </a>
+        </div>
+        <% if(user.id ==article.userId) { %>
+        <div>
+            <a href="/articles/<%=comments.id%>/comment/edit">Edit</a>
+            <a href="/articles/<%=comments.id%>/comment/delete">Delete</a>
+        </div>
+        <% } %>
+    
+    <% }) %>
+ </main>
+
+</body>
+</html>

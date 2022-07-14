@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="header">
+      <h1><a href="/articles">Home Page</a></h1>
+      <% if(user){ %>
+      <h2 class="login-user">
+        <strong class="strong"> Login User</strong> : <%=user.name%>
+      </h2>
+      <div>
+        <nav class="nav">
+          <a href="/articles/new"> Add Articles</a>
+          <a href="/users/logout">Logout</a>
+        </nav>
+      </div>
+
+      <% }else{ %>
+      <h2 class="login-user">
+        <strong class="strong">Not Login User :</strong> ""
+      </h2>
+      <nav class="nav">
+        <a href="/users/login">Login</a>
+        <a href="/users/register">register</a>
+      </nav>
+      <% } %>
+    </header>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+<% include partails/header %>
+<body>
+    <%  articles.forEach(article=>{  %>
+<h2> <a href="/articles/<%= article.id%>"> <%= article.title %> </a></h2>
+
+    <%  })  %>
+
+   
+</body>
+</html>
